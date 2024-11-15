@@ -2,9 +2,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from inventory.forms import UserRegistry, ProductForm, OrderForm
-from inventory.models import Product, Order
-
+from inventory.forms import UserRegistry, ProductForm, OrderForm, SupplierForm
+from inventory.models import Product, Order, Supplier
 
 @login_required
 def index(request):
@@ -82,3 +81,64 @@ def register(request):
         form = UserRegistry()
     context = {"register": "Register", "form": form}
     return render(request, "inventory/register.html", context)
+
+@login_required
+def supplier_list(request):
+    # View to list all suppliers
+    suppliers = Supplier.objects.all()
+    context = {
+        "title": "Suppliers",
+        "suppliers": suppliers,
+    }
+    return render(request, "inventory/supplier_list.html", context)
+
+
+@login_required
+def add_supplier(request):
+    # View to add a new supplier
+    if request.method == "POST":
+        form = SupplierForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("supplier_list")
+    else:
+        form = SupplierForm()
+    
+    context = {
+        "title": "Add Supplier",
+        "form": form,
+    }
+    return render(request, "inventory/add_supplier.html", context)
+
+
+@login_required
+def edit_supplier(request, supplier_id):
+    supplier = get_object_or_404(Supplier, id=supplier_id)
+    if request.method == "POST":
+        form = SupplierForm(request.POST, instance=supplier)
+        if form.is_valid():
+            form.save()
+            return redirect("supplier_list")
+    else:
+        form = SupplierForm(instance=supplier)
+    
+    context = {
+        "title": "Edit Supplier",
+        "form": form,
+        "supplier": supplier,
+    }
+    return render(request, "inventory/edit_supplier.html", context)
+
+
+@login_required
+def delete_supplier(request, supplier_id):
+    supplier = get_object_or_404(Supplier, id=supplier_id)
+    if request.method == "POST":
+        supplier.delete()
+        return redirect("supplier_list")
+    
+    context = {
+        "title": "Delete Supplier",
+        "supplier": supplier,
+    }
+    return render(request, "inventory/delete_supplier.html", context)

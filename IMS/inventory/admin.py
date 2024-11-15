@@ -1,5 +1,5 @@
 from django.contrib import admin
-from inventory.models import Product, Order, UserProfile
+from inventory.models import Product, Order, UserProfile, Supplier
 
 admin.site.site_header = "Inventory Admin"
 
@@ -25,6 +25,13 @@ class UserProfileAdmin(admin.ModelAdmin):
     search_fields = ["user"]
 
 
+class SupplierAdmin(admin.ModelAdmin):
+    list_display = ("name", "email", "contact_info", "address")
+    search_fields = ("name", "email")
+    list_filter = ("name",)
+
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(Supplier, SupplierAdmin)
