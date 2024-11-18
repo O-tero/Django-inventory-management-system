@@ -1,0 +1,30 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+  }
+  
+  .container {
+    padding: 20px;
+  }
+  
+  /* Import component and page styles */
+  @import "./components/Sidebar.css";
+  @import "./components/Header.css";
+  @import "./components/Notification.css";
+  @import "./components/Table.css";
+  @import "./components/FormModal.css";
+  @import "./components/Chart.css";
+  
+  @import "./pages/DashboardPage.css";
+  @import "./pages/InventoryPage.css";
+  @import "./pages/OrderPage.css";
+  @import "./pages/SuppliersPage.css";
+  @import "./pages/ReportsPage.css";
+  

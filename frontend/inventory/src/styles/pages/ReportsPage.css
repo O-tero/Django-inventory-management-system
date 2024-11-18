@@ -1,0 +1,11 @@
+.reports-page {
+    margin-left: 250px;
+    padding: 20px;
+  }
+  
+  .reports-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
