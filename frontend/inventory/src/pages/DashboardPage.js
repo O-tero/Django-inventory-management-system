@@ -1,17 +1,26 @@
-import React from 'react';
-import Chart from '../components/Chart';
-import Notification from '../components/Notification';
+import React from "react";
+import Chart from "../components/Chart";
+import Table from "../components/Table";
+import Notification from "../components/Notification";
 
-const DashboardPage = () => (
-    <div className="dashboard">
-        <h1>Dashboard</h1>
-        <div className="dashboard-metrics">
-            <Notification message="Low Stock Alert: Part XYZ running low." />
-            <div className="metric-card">Total Inventory: 1500 items</div>
-            <div className="metric-card">Pending Orders: 35</div>
-        </div>
-        <Chart data={[ /* sales data here */ ]} />
+const DashboardPage = () => {
+  return (
+    <div className="dashboard-page">
+      <h1>Dashboard</h1>
+      <Notification message="Stock levels are running low for some items." />
+      <div className="dashboard-content">
+        <Chart title="Sales Overview" />
+        <Chart title="Stock Levels" />
+      </div>
+      <Table
+        title="Recent Orders"
+        data={[
+          { id: 1, item: "Brake Pads", status: "Shipped", quantity: 10 },
+          { id: 2, item: "Engine Oil", status: "Pending", quantity: 20 },
+        ]}
+      />
     </div>
-);
+  );
+};
 
 export default DashboardPage;
