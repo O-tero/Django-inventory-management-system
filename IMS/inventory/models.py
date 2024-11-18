@@ -56,7 +56,7 @@ class Order(models.Model):
 
 class Notification(models.Model):
     item = models.ForeignKey(Product, on_delete=models.CASCADE)
-    message = models.CharField(max_length=255)``
+    message = models.CharField(max_length=255)
     timestamp = models.DateTimeField(auto_now_add=True)
     read = models.BooleanField(default=False)
 
